@@ -1,0 +1,29 @@
+database simple trello (project manajemen tools)
+
+1. tabel list
+   - id
+   - title
+2. tabel card
+   - id
+   - listId
+   - title
+   - description
+   - date
+   - due date
+   - status
+
+3. tabel comment card (child dari card)
+  - id
+  - cardId
+  - userId
+  - date
+  - message/comment
+
+4. tabel file card (child dari card)
+  - id
+  - cardId
+  - userId
+  - date
+  - filename
+  - filepath
+

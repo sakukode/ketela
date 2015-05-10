@@ -1,0 +1,23 @@
+loanNumber  nopinjam
+customerId kdanggota
+loanCategoryId *pinjaman reguler
+status approved 
+balance *
+sponsorId kdreff 
+purpose keperluan
+purposePrice 
+loanValue Npinjam
+timePeriod lmpinjaman
+grantedGuarantee jaminan
+guaranteeValue
+guaranteeOnBehalfOf
+loanReceipt
+repaymentMethod
+paymentMethod 
+provision prov 
+administrationFee
+lifeInsurance
+guaranteeInsurance
+interest bunga
+effectiveInterest effectif
+acceptedDate tgl
