@@ -4,8 +4,12 @@ class Home extends CI_Controller {
 
 	function __construct() {
 		parent::__construct();
+		//load library
+		$this->load->library('auth');
+		$this->auth->logged_in();
 		//load model
 		$this->load->model(array('list_model','card_model','user_model'));
+	
 	}
 
 	/**
@@ -38,6 +42,8 @@ class Home extends CI_Controller {
 
 			$data = array(
 				'title' => $title,
+				'userId' => $this->session->userdata('userId'),
+				'date' => date("Y-m-d")
 			);
 
 			$this->list_model->add($data);

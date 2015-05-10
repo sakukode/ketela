@@ -6,7 +6,8 @@ class List_model extends CI_Model {
 	private $table = "list";
 
 	public function get_all() {
-		$query = $this->db->get($this->table);
+		$userId = $this->session->userdata('userId');
+		$query = $this->db->get_where($this->table, array('userId'=> $userId));
 		
 		if($query->num_rows > 0) {
 			return $query->result();
