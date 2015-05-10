@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: May 10, 2015 at 07:52 PM
+-- Generation Time: May 10, 2015 at 10:48 PM
 -- Server version: 5.5.27
 -- PHP Version: 5.4.7
 
@@ -36,17 +36,15 @@ CREATE TABLE IF NOT EXISTS `card` (
   `status` enum('pending','progress','done') NOT NULL DEFAULT 'pending',
   PRIMARY KEY (`id`),
   KEY `listId` (`listId`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
 
 --
 -- Dumping data for table `card`
 --
 
 INSERT INTO `card` (`id`, `listId`, `title`, `description`, `date`, `duedate`, `status`) VALUES
-(1, 3, 'card one', 'this is card one', '2015-05-03', '2015-05-03 17:00:00', 'pending'),
-(2, 3, 'card two', '', '0000-00-00', NULL, 'pending'),
-(3, 3, 'card tri', '', '2015-05-03', NULL, 'pending'),
-(4, 4, 'hello world', '', '2015-05-03', NULL, 'pending');
+(1, 1, 'hallo dunia', '', '2015-05-10', NULL, 'pending'),
+(2, 1, 'sugeng enjing', '', '2015-05-10', NULL, 'pending');
 
 -- --------------------------------------------------------
 
@@ -78,17 +76,14 @@ CREATE TABLE IF NOT EXISTS `filecard` (
   `filename` varchar(255) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `cardId` (`cardId`,`userId`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
 
 --
 -- Dumping data for table `filecard`
 --
 
 INSERT INTO `filecard` (`id`, `cardId`, `userId`, `date`, `filename`) VALUES
-(4, 4, 1, '2015-05-09', 'simple-trello2.txt'),
-(5, 4, 1, '2015-05-09', 'pinjaman.txt'),
-(6, 2, 1, '2015-05-09', 'bolt.txt'),
-(7, 2, 1, '2015-05-09', 'pajak.xlsx');
+(1, 1, 1, '2015-05-10', 'proposal_club_sepeda_Gendingan.docx');
 
 -- --------------------------------------------------------
 
@@ -98,20 +93,20 @@ INSERT INTO `filecard` (`id`, `cardId`, `userId`, `date`, `filename`) VALUES
 
 CREATE TABLE IF NOT EXISTS `list` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
+  `userId` int(11) NOT NULL,
   `title` varchar(100) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
+  `date` date NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `userId` (`userId`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
 
 --
 -- Dumping data for table `list`
 --
 
-INSERT INTO `list` (`id`, `title`) VALUES
-(3, 'new list'),
-(4, 'another list'),
-(5, 'beatiful list'),
-(6, 'wonderful list'),
-(7, 'crazy list');
+INSERT INTO `list` (`id`, `userId`, `title`, `date`) VALUES
+(1, 1, 'hello world', '2015-05-10'),
+(2, 1, 'Make apps', '2015-05-10');
 
 -- --------------------------------------------------------
 
@@ -150,17 +145,36 @@ CREATE TABLE IF NOT EXISTS `usercard` (
   `userId` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `cardId` (`cardId`,`userId`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
 
 --
 -- Dumping data for table `usercard`
 --
 
 INSERT INTO `usercard` (`id`, `cardId`, `userId`) VALUES
-(2, 1, 1),
-(3, 1, 3),
-(4, 1, 4),
-(1, 4, 3);
+(1, 1, 3);
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `card`
+--
+ALTER TABLE `card`
+  ADD CONSTRAINT `card_ibfk_1` FOREIGN KEY (`listId`) REFERENCES `list` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `filecard`
+--
+ALTER TABLE `filecard`
+  ADD CONSTRAINT `filecard_ibfk_1` FOREIGN KEY (`cardId`) REFERENCES `card` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `usercard`
+--
+ALTER TABLE `usercard`
+  ADD CONSTRAINT `usercard_ibfk_1` FOREIGN KEY (`cardId`) REFERENCES `card` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

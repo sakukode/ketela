@@ -56,8 +56,11 @@
             <button type="submit" class="btn btn-success">Add</button>
           </form>
           <!-- show form error-->
+          <br>
           <?php if(isset($list_error)): ?>
+          <div class="alert alert-danger">
           <p><?php echo $list_error; ?></p>
+          </div>
           <?php endif; ?>
           <!-- end show form error-->
           <!-- show success message-->
@@ -75,9 +78,12 @@
       <div class="row">
         <div class="col-md-12">
           <hr>
+          <br>
           <!-- show form error-->
           <?php if(isset($card_error)): ?>
+          <div class="alert alert-danger">
           <p><?php echo $card_error; ?></p>
+          </div>
           <?php endif; ?>
           <!-- end show form error-->
           <!-- show success message-->
